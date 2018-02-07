@@ -6,6 +6,7 @@ import picamera
 import logging
 import socketserver
 from threading import Condition
+from daemon import runner
 import RPi.GPIO as GPIO
 
 GPIO.setwarnings(False)
@@ -173,8 +174,9 @@ def sensor():
 		print("error")
 		GPIO.cleanup()
 
-hilo1 = threading.Thread(target=camara)
-hilo2 = threading.Thread(target=sensor)
+hilo1 = threading.Thread(name='daemon',target=camara)
+hilo1.setDaemon(True)
+hilo2 = threading.Thread(name='non-daemon',target=sensor)
 
 hilo1.start()
 hilo2.start()
