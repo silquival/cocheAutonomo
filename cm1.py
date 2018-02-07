@@ -6,7 +6,6 @@ import picamera
 import logging
 import socketserver
 from threading import Condition
-#from http import server
 import RPi.GPIO as GPIO
 
 GPIO.setwarnings(False)
